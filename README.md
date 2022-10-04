@@ -1,1 +1,1 @@
-# react-ts-Medium
+# react-ts-reddit
