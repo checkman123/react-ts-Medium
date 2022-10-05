@@ -7,6 +7,7 @@ import {
   ChevronDownIcon,
   HomeIcon,
   MagnifyingGlassIcon,
+  UserMinusIcon,
 } from "@heroicons/react/24/solid";
 import {
   ChatBubbleLeftEllipsisIcon,
@@ -17,8 +18,11 @@ import {
   PlusIcon,
   SpeakerWaveIcon,
 } from "@heroicons/react/24/outline";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export const Header = () => {
+  //access session data, rename data to session
+  const { data: session } = useSession();
   return (
     <div className="sticky top-0 z-50 flex bg-white px-4 py-2 shadow-sm">
       {/* Logo */}
@@ -57,11 +61,29 @@ export const Header = () => {
         <Bars3Icon className="icon" />
       </div>
 
-      {/*Sign In/Out Button */}
-      <div className="hidden cursor-pointer items-center gap-x-2 border border-gray-100 lg:flex">
-        <ArrowRightOnRectangleIcon className="icon flex-shrink-0" />
-        <p className="text-gray-500">Sign In</p>
-      </div>
+      {/*Sign In/Out Button 
+         First check if user is signin. session === true*/}
+      {session ? (
+        <div
+          onClick={() => {
+            signOut();
+          }}
+          className="hidden cursor-pointer items-center gap-x-2 border border-gray-100 lg:flex"
+        >
+          <UserMinusIcon className="icon flex-shrink-0" />
+          <p className="text-gray-500">Sign Out</p>
+        </div>
+      ) : (
+        <div
+          onClick={() => {
+            signIn();
+          }}
+          className="hidden cursor-pointer items-center gap-x-2 border border-gray-100 lg:flex"
+        >
+          <ArrowRightOnRectangleIcon className="icon flex-shrink-0" />
+          <p className="text-gray-500">Sign In</p>
+        </div>
+      )}
     </div>
   );
 };
