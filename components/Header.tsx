@@ -68,10 +68,16 @@ export const Header = () => {
           onClick={() => {
             signOut();
           }}
-          className="hidden cursor-pointer items-center gap-x-2 border border-gray-100 lg:flex"
+          className="hidden cursor-pointer items-center gap-x-2 border border-gray-100 hover:bg-gray-100 lg:flex"
         >
           <UserMinusIcon className="icon flex-shrink-0" />
-          <p className="text-gray-500">Sign Out</p>
+
+          <div className="flex1 text-xs">
+            <p className="truncate">{session?.user?.name}</p>
+            <p className="text-gray-500">Sign Out</p>
+          </div>
+
+          <ChevronDownIcon className="h-5 flex-shrink-0 text-gray-400" />
         </div>
       ) : (
         <div
@@ -81,7 +87,7 @@ export const Header = () => {
           className="hidden cursor-pointer items-center gap-x-2 border border-gray-100 lg:flex"
         >
           <ArrowRightOnRectangleIcon className="icon flex-shrink-0" />
-          <p className="text-gray-500">Sign In</p>
+          <p className="icon text-gray-500">Sign In</p>
         </div>
       )}
     </div>
