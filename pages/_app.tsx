@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
+import { Header } from "../components";
 
 function MyApp({
   Component,
@@ -11,7 +12,10 @@ function MyApp({
 }>) {
   return (
     <SessionProvider session={pageProps.session}>
-      <Component {...pageProps} />
+      <div className="h-screen overflow-y-scroll bg-slate-200">
+        <Header />
+        <Component {...pageProps} />
+      </div>
     </SessionProvider>
   );
 }
